@@ -16,7 +16,7 @@ body {
     padding: 0 1rem;
 }
 
-.flex-container{
+.flex-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -45,6 +45,7 @@ h2 {
 
 p {
     margin-bottom: 1.5rem;
+    max-width: 70ch;
 }
 
 /* ***************header************* */
@@ -53,13 +54,31 @@ header {
     background-color: var(--navy);
     padding: 1rem 0;
 }
-header nav{
-    flex: 1 0 100%;
+
+header nav {
     max-height: 0;
     overflow: hidden;
+    transition: max-height 0.8s ease-in-out;
+    position: absolute;
+    background-color: var(--navy);
+    left: 0;
+    top: 88px;
+    width: 100vw;
+    padding: 0 1 rem;
+
 }
-.show-nav{
-    max-height: 100vh;
+
+.show-nav {
+    max-height: 27rem;
+}
+
+
+.toggle-nav {
+    background-color: var(--navy);
+    border: none;
+    color: var(--off-white);
+    font-size: 0.8rem;
+    text-transform: lowercase;
 }
 
 .toggle-nav svg {
@@ -68,18 +87,10 @@ header nav{
     display: block;
 }
 
-.toggle-nav {
-    background-color: var(--navy);
-    border: none;
-    color: var(--off-white);
-    font-size: 0.8rem;
-    text-transform: lowercase;
-   
-}
 
-ul.menu{
+ul.menu {
     border-bottom: 1px solid var(--off-white);
-    margin-bottom:1rem ;
+    margin-bottom: 1rem;
 }
 
 ul.menu a {
@@ -98,18 +109,27 @@ a.menu-link {
     font-size: 1.3rem;
 }
 
+
+ul.menu svg {
+    display: none;
+}
+
+
+
 ul.menu li {
-    line-height: 2.175rem;
+    line-height: 2.1875rem;
     margin: 0.5rem 0;
 }
 
+
 ul.submenu {
-    padding-left: 0.5rem;
+    padding-left: 1.875rem;
 }
 
-ul.utility-nav{
+ul.utility-nav {
     display: flex;
     gap: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 ul.utility-nav a {
@@ -122,9 +142,94 @@ ul.utility-nav a {
     text-transform: uppercase;
 }
 
+/* ***************main************* */
+
 section {
     padding: 3.125rem 0;
 }
 
 
-/* ***************header************* */
+/* ***************media queries************* */
+@media screen and (min-width: 800px) {
+    .toggle-nav {
+        display: none;
+    }
+
+    header nav {
+        max-height: 100vh;
+        position: static;
+        width: fit-content;
+        display: flex;
+        overflow: visible;
+        gap: 3.125rem;
+        align-items: center;
+    }
+
+    ul.menu {
+        display: flex;
+        border-bottom: none;
+        gap: 1.5rem;
+        margin-bottom: 0;
+    }
+
+    ul.menu li {
+        position: relative;
+    }
+
+    ul.menu svg {
+        fill: var(--off-white);
+        display: inline;
+        width: 1.25rem;
+    }
+
+    ul.menu .menu-link {
+        display: flex;
+        align-items:center ;
+        gap: .5rem;
+    }
+
+    ul.submenu {
+        position: absolute;
+        top: 45px;
+        left: 0;
+        width: 100%;
+        background-color: var(--navy);
+        white-space: nowrap;
+        text-align: right;
+        padding: 0 0.5rem;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.5s ease;
+    }
+
+
+    ul.menu li:hover ul.submenu {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    ul.menu li:focus-within > ul,
+    ul.menu li > ul:focus {
+        visibility: visible;
+        opacity: 1;
+    }
+
+
+    ul.utility-nav {
+        margin-bottom: 0;
+    }
+    .gallery-flex{
+        display: flex;
+        align-items: self-start;
+    }
+    img{
+        width: 50%;
+    }
+
+    img:last-of-type{
+        position: relative;
+        top: 100px;
+        right: 150px;
+    }
+
+}
